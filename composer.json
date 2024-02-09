@@ -1,0 +1,21 @@
+{
+    "name": "networkteam/typo3-logger",
+    "description": "Log in JSON format to stderr",
+    "type": "typo3-cms-extension",
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "require": {
+        "typo3/cms-core": "^11.5 || ^12.4 || dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Networkteam\\Logger\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "networkteam_logger"
+        }
+    }
+}
