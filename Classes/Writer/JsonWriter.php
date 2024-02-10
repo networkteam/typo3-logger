@@ -58,6 +58,9 @@ class JsonWriter extends AbstractWriter
             if ($requestId) {
                 $data['request_id'] = $requestId;
             }
+        } else {
+            global $argv;
+            $data['command_line'] = implode(' ', $argv);
         }
 
         if ($this->options !== []) {
