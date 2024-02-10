@@ -1,10 +1,12 @@
 # TYPO3 Logger
 
-This extension provides a LogWriter to log in JSON format to stderr.
+This extension provides a JSON LogWriter that logs to stderr.
 
 ## Installation
 
-Run `composer req networkteam/typo3-logger`
+```shell
+composer req networkteam/typo3-logger
+```
 
 ## Configuration
 
@@ -69,3 +71,16 @@ SYS:
   }
 }
 ```
+
+## PHP-FPM Configuration
+
+```ini
+[www]
+catch_workers_output = yes
+decorate_workers_output = no
+```
+
+
+## Usage by 3rd parties
+
+Please feel free to use. Expect breaking changes at any time.

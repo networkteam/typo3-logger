@@ -1,6 +1,7 @@
 {
     "name": "networkteam/typo3-logger",
     "description": "Log in JSON format to stderr",
+    "keywords": ["logging", "12-factor"],
     "type": "typo3-cms-extension",
     "license": [
         "GPL-2.0-or-later"

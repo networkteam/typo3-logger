@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Log\Writer\AbstractWriter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Log writer that writes the log records to stderr
+ * A JSON LogWriter that logs to stderr.
  */
 class JsonWriter extends AbstractWriter
 {
