@@ -50,21 +50,13 @@ class JsonWriter extends AbstractWriter
             'context' => $context
         ];
 
-        $method = $_SERVER['REQUEST_METHOD'] ?? null;
-        if ($method) {
-            $data['url'] = $this->anonymizeToken(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
-            $data['method'] = $method;
-            $requestId = $_SERVER['X-REQUEST-ID'] ?? $_SERVER['HTTP_X_REQUEST_ID'] ?? null;
-            if ($requestId) {
-                $data['request_id'] = $requestId;
-            }
-        } else {
+        if (PHP_SAPI === 'cli') {
             global $argv;
             $data['command_line'] = implode(' ', $argv);
-        }
-
-        if ($this->options !== []) {
-            $data['logger_context'] = $this->options;
+        } else {
+            $data['url'] = $this->anonymizeToken(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+            $data['method'] = $_SERVER['REQUEST_METHOD'] ?? null;
+            $data['request_id'] = $_SERVER['X-REQUEST-ID'] ?? $_SERVER['HTTP_X_REQUEST_ID'] ?? null;
         }
 
         $stderr = fopen('php://stderr', 'a');
