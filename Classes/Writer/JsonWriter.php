@@ -59,9 +59,11 @@ class JsonWriter extends AbstractWriter
             $data['request_id'] = $_SERVER['X-REQUEST-ID'] ?? $_SERVER['HTTP_X_REQUEST_ID'] ?? null;
         }
 
-        $stderr = fopen('php://stderr', 'a');
-        fwrite($stderr, json_encode($data) . PHP_EOL);
-        fclose($stderr);
+        $stderr = @fopen('php://stderr', 'a');
+        if ($stderr) {
+            fwrite($stderr, json_encode($data) . PHP_EOL);
+            fclose($stderr);
+        }
 
         return $this;
     }
