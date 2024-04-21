@@ -83,4 +83,4 @@ decorate_workers_output = no
 
 ## Usage by 3rd parties
 
-Please feel free to use. Expect breaking changes at any time.
+Please feel free to use it. Expect breaking changes at any time.
