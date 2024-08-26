@@ -7,7 +7,7 @@
         "GPL-2.0-or-later"
     ],
     "require": {
-        "typo3/cms-core": "^11.5 || ^12.4 || dev-main"
+        "typo3/cms-core": "^11.5 || ^12.4 || ^13.2 || dev-main"
     },
     "autoload": {
         "psr-4": {
