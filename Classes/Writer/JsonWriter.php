@@ -2,10 +2,11 @@
 
 namespace Networkteam\Logger\Writer;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Log\LogRecord;
 use TYPO3\CMS\Core\Log\Writer\AbstractWriter;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * A JSON LogWriter that logs to stderr.
@@ -54,7 +55,7 @@ class JsonWriter extends AbstractWriter
             global $argv;
             $data['command_line'] = implode(' ', $argv);
         } else {
-            $data['url'] = $this->anonymizeToken(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
+            $data['url'] = $this->anonymizeToken($this->getRequestUrl());
             $data['method'] = $_SERVER['REQUEST_METHOD'] ?? null;
             $data['request_id'] = $_SERVER['X-REQUEST-ID'] ?? $_SERVER['HTTP_X_REQUEST_ID'] ?? null;
         }
@@ -75,6 +76,18 @@ class JsonWriter extends AbstractWriter
             $classname = substr($classname, $pos + 1);
         }
         return $classname;
+    }
+
+    protected function getRequestUrl(): string
+    {
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if ($request instanceof ServerRequestInterface) {
+            $normalizedParams = $request->getAttribute('normalizedParams');
+            if ($normalizedParams instanceof NormalizedParams) {
+                return $normalizedParams->getRequestUrl();
+            }
+        }
+        return '';
     }
 
     /**
